@@ -6,6 +6,10 @@ Source: merged ticket #4471, KB export dated 2026-10-04.
 
 R-41236 says the invite arrived before the booking was made. It is listed in oneDayMove but does not state a one-day difference. Chronology, delayed messages or misunderstanding remain unverified. This report remains in the 379-report parser issue; this investigation overlaps it and adds no report to the total.
 
+## Desk disposition / tracking closure
+
+Closing this overlapping investigation tracker as not planned to consolidate the course triage under #1 and the KB evidence record. The desk closed #4471, but did not establish a cause or fix for these reports. Their evidence and uncertainty remain in the KB and report records. This closure does not claim the symptoms were resolved.
+
 ## Verification / investigation
 
 Obtain booking creation, event and message delivery timestamps, including timezones and event IDs. Expected: establish whether an invite was generated before creation. No confirmed reproduction or cause is available.

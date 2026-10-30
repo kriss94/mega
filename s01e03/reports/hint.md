@@ -6,6 +6,10 @@ Source: merged ticket #4471, KB export dated 2026-10-04.
 
 booking-v3 prints MM/DD/YYYY while the form interprets the date in the day-first tenant locale. This is distinct from the shared parser problem.
 
+## Desk disposition / tracking closure
+
+Desk engineering update: #4471 closed 5 October. Hint: won't fix — booking-v3 form retired. Closing as not planned because the affected form was retired, not because the hint was fixed. Export count remains 33.
+
 ## Verification / investigation
 
 Use copper.studio booking-v3 form. Follow MM/DD/YYYY for an intended April 7 booking (04/07/YYYY). Check whether the tenant parser interprets July 4. Expected: hint and parser use the same date order. This reproduction is derived from source logic, not a live test.

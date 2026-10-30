@@ -6,6 +6,10 @@ Source: merged ticket #4471, KB export dated 2026-10-04.
 
 The shared parser reads month first for day-first tenants. The export attributes these reports using tenant locale and channel, not intake tags. All 379 reports retain their exported parser attribution. Five contradictory reports are also covered by overlapping investigations; this attribution does not prove the parser explains their bodies.
 
+## Desk disposition / tracking closure
+
+Desk engineering update: #4471 closed 5 October. Parser: fixed — `fix(dates): parse dd/mm for eu locales`. Closing based on the desk disposition. The 379-report count remains exported attribution; no independent runtime test was supplied, and five contradictory reports retain unconfirmed causes.
+
 ## Verification / investigation
 
 Use a day-first tenant through app/email or booking-v2; enter an unambiguous intended day/month combination such as 7 April. Check whether the invite becomes 4 July. Expected: preserve the intended date.

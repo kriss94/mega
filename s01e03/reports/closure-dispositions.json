@@ -1,0 +1,18 @@
+{
+  "parser": {
+    "reason": "completed",
+    "comment": "Desk engineering update: #4471 closed 5 October. Parser: fixed \u2014 `fix(dates): parse dd/mm for eu locales`. Closing based on the desk disposition. The 379-report count remains exported attribution; no independent runtime test was supplied, and five contradictory reports retain unconfirmed causes."
+  },
+  "hint": {
+    "reason": "not planned",
+    "comment": "Desk engineering update: #4471 closed 5 October. Hint: won't fix \u2014 booking-v3 form retired. Closing as not planned because the affected form was retired, not because the hint was fixed. Export count remains 33."
+  },
+  "one-day": {
+    "reason": "not planned",
+    "comment": "Closing this overlapping investigation tracker as not planned to consolidate the course triage under #1 and the KB evidence record. The desk closed #4471, but did not establish a cause or fix for these reports. Their evidence and uncertainty remain in the KB and report records. This closure does not claim the symptoms were resolved."
+  },
+  "chronology": {
+    "reason": "not planned",
+    "comment": "Closing this overlapping investigation tracker as not planned to consolidate the course triage under #1 and the KB evidence record. The desk closed #4471, but did not establish a cause or fix for these reports. Their evidence and uncertainty remain in the KB and report records. This closure does not claim the symptoms were resolved."
+  }
+}

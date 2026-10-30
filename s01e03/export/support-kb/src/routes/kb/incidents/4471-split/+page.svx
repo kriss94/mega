@@ -13,8 +13,7 @@ signature: 'v1.eyJzdG9yeSI6Im9mZiIsInN1YiI6IjEzMDgiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhd
 </script>
 
 The original ticket's claim that one parser fix covers every report is not supported by this export.
-This page records the 2026-10-04 snapshot. The student confirmed no newer material was available on 2026-10-30; the review date does
-not imply that the data is current.
+Counts describe the 2026-10-04 export. The later desk engineering update is recorded below; it supplies dispositions, not new report counts.
 
 <ReportSplit />
 
@@ -33,6 +32,18 @@ the parser issue retains all 379 reports, while the hint issue covers 33. The fo
 and one chronology report are overlapping investigation subsets, not additional reports.
 379 + 33 = 412 unique reports. The auxiliary disjoint triage view is 374/33/4/1; it is not the desk's issue count
 and does not prove four independent root causes.
+
+## Desk disposition — 5 October
+
+The Challenge-page engineering update, supplied by the student, says #4471 closed on 5 October:
+
+- Parser: **fixed** — `fix(dates): parse dd/mm for eu locales`.
+- Hint: **won’t fix** — booking-v3 form retired.
+
+This is desk-reported status; no fix commit URL or runtime verification was supplied.
+The four one-day discrepancies and the chronology report still have unconfirmed causes.
+Their overlapping tracking issues were closed as not planned to consolidate this course triage;
+that does not establish that those symptoms were fixed.
 
 ## Evidence and follow-up
 

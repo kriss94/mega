@@ -6,6 +6,10 @@ Source: merged ticket #4471, KB export dated 2026-10-04.
 
 Four reports explicitly describe a one-day discrepancy. Day/month swapping does not explain these examples. These reports do not establish a shared root cause. Timezone handling is a hypothesis, not a demonstrated cause; Lisbon and Toronto can correctly show different local dates for the same instant. All four remain in the 379-report parser issue. This investigation overlaps that issue; do not add its count to the total.
 
+## Desk disposition / tracking closure
+
+Closing this overlapping investigation tracker as not planned to consolidate the course triage under #1 and the KB evidence record. The desk closed #4471, but did not establish a cause or fix for these reports. Their evidence and uncertainty remain in the KB and report records. This closure does not claim the symptoms were resolved.
+
 ## Verification / investigation
 
 Compare invite and calendar dates for R-41202; compare the same meeting in Lisbon and Toronto for R-41344. Obtain original timestamps, timezone settings and calendar payloads. Expected: represent the same instant consistently and explain local date differences. No live reproduction is available.

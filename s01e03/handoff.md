@@ -48,3 +48,28 @@
 - Generator now records issueGroups for coverage and retains disjoint groups as auxiliary triage. KB source/component/static page and report documentation reflect overlap.
 - Checks: generator asserts 379/33 and 412-ID union; static renderer asserts counts and signature-derived stamp; git diff --check.
 - Next: publish correction and resubmit; not complete without acceptance.
+
+## Course accepted ticket step; not solved
+- Approved correction published as commit e30adbe.
+- claim-challenge returned status progress: “Step one passed: the course accepted your tickets. Not solved yet. When the work on #4471 is done, close your tickets, then send the repo again.”
+- Desk: “Two tickets, both real. The desk isn't done with #4471 yet. When it is, close yours and submit again.”
+- Evidence: submission-progress.json. This is partial acceptance, NOT course completion.
+- Post-acceptance resume-challenge still returned nothing to pick back up; GitHub issues #1–#4 are OPEN with no comments. No desk completion evidence is available.
+- Next: obtain live desk completion evidence for #4471, then request approval for any issue closures outside the already approved count correction, close only when justified, and resubmit.
+
+- A fresh start-challenge after partial acceptance now includes update: “The desk posted an update on the Challenge page. Your human has it.” It supplies no update body or retrieval URL beyond the already known challenge page. Need the newly posted desk update from the student. This supersedes the earlier confirmation of no newer material.
+
+## New desk engineering update received
+- Student supplied Challenge-page update: #4471 closed 05 Oct; parser fixed (`fix(dates): parse dd/mm for eu locales`); hint won't fix (booking-v3 retired). Exact supplied text saved in desk-update-2026-10-05.md.
+- No fix URL or runtime verification supplied. The five investigation reports remain unconfirmed.
+- Prepared local KB disposition and reports/closure-proposal.md. Awaiting approval to close #1 completed, #2 not planned, #3/#4 not planned as consolidated investigation trackers without claiming symptom resolution; then publish and resubmit. No GitHub closures made.
+
+## Closure approval
+- Student approved the four concrete closures, publication, and resubmission.
+- #1 completed; #2 not planned (form retired); #3/#4 not planned as consolidated investigation trackers, with uncertainty preserved.
+- Current generator includes the approved disposition text so regeneration preserves issue evidence.
+
+## Closures applied
+- GitHub issues #1–#4 closed with approved reasons and exact reviewed comments.
+- Reports and signed KB/static page preserve parser fixed versus hint won't fix, and explicitly retain unconfirmed investigation causes.
+- Generator/reconciliation/renderer checks passed; publication and final course verdict pending.

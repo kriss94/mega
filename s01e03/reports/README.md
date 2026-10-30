@@ -1,6 +1,6 @@
 # Ticket #4471 report split
 
-Snapshot: KB export dated 2026-10-04. Analysis reviewed 2026-10-30; student confirmed no newer material on 2026-10-30.
+Snapshot: KB export dated 2026-10-04. Analysis reviewed 2026-10-30; subsequent engineering update supplied by the student: #4471 closed 5 October.
 
 | Report | Unique reports | Status |
 |---|---:|---|
@@ -30,3 +30,11 @@ Static desk-facing review copy: [kb-page.html](../kb-page.html), regenerated wit
 - [hint](https://github.com/kriss94/mega/issues/2)
 - [one-day](https://github.com/kriss94/mega/issues/3)
 - [chronology](https://github.com/kriss94/mega/issues/4)
+
+## Desk dispositions and approved tracking closures
+
+- #1 completed: parser fixed, `fix(dates): parse dd/mm for eu locales`.
+- #2 not planned: hint won't fix because booking-v3 was retired.
+- #3/#4 not planned: consolidated investigation trackers; their five reports retain unconfirmed causes and are not claimed fixed.
+
+Source: [desk update](../desk-update-2026-10-05.md). Disposition comments: [closure-dispositions.json](closure-dispositions.json). No independent product runtime verification was supplied.
