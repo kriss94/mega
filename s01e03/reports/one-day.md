@@ -4,7 +4,7 @@ Source: merged ticket #4471, KB export dated 2026-10-04.
 
 **Reports covered: 4 unique reports.**
 
-Four reports explicitly describe a one-day discrepancy. Day/month swapping does not explain these examples. These reports do not establish a shared root cause. Timezone handling is a hypothesis, not a demonstrated cause; Lisbon and Toronto can correctly show different local dates for the same instant. The export mechanically places all four under parser.
+Four reports explicitly describe a one-day discrepancy. Day/month swapping does not explain these examples. These reports do not establish a shared root cause. Timezone handling is a hypothesis, not a demonstrated cause; Lisbon and Toronto can correctly show different local dates for the same instant. All four remain in the 379-report parser issue. This investigation overlaps that issue; do not add its count to the total.
 
 ## Verification / investigation
 

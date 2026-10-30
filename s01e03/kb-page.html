@@ -26,7 +26,7 @@
 </style><div class="kb"><header><a class="crumb" href="https://github.com/kriss94/mega/tree/main/s01e03/export/support-kb/src/routes/kb">support desk · kb</a><h1>#4471 · report split and evidence gaps</h1><p class="meta">owner kriss94 · investigation · reviewed 2026-10-30</p></header><main><p>The original ticket's claim that one parser fix covers every report is not supported by this export.
 This page records the 2026-10-04 snapshot. The student confirmed no newer material was available on 2026-10-30; the review date does
 not imply that the data is current.</p>
-<p>427 export rows; 412 unique reports merged into #4471.</p><table><thead><tr><th>Problem / investigation</th><th>Unique reports</th><th>Evidence status</th></tr></thead><tbody><tr><td>Shared month-first parser</td><td>374</td><td>Tenant-based attribution, excluding contradictions</td></tr><tr><td>booking-v3 date hint</td><td>33</td><td>Distinct form configuration problem</td></tr><tr><td>One-day discrepancies</td><td>4</td><td>Cause unconfirmed</td></tr><tr><td>Invite before booking</td><td>1</td><td>Ambiguous chronology; cause unconfirmed</td></tr></tbody></table>
+<p>427 export rows; 412 unique reports merged into #4471.</p><table><thead><tr><th>Problem / investigation</th><th>Unique reports</th><th>Evidence status</th></tr></thead><tbody><tr><td>Shared month-first parser</td><td>379</td><td>Exported attribution; includes five unconfirmed reports</td></tr><tr><td>booking-v3 date hint</td><td>33</td><td>Distinct form configuration problem</td></tr><tr><td>One-day discrepancies</td><td>4</td><td>Overlapping parser subset; cause unconfirmed</td></tr><tr><td>Invite before booking</td><td>1</td><td>Overlapping parser subset; chronology unconfirmed</td></tr></tbody></table>
 <h2>Separate the evidence before assigning fixes</h2>
 <p>Use tenant locale and booking-form version, rather than browser locale or intake tags, to distinguish
 the shared month-first parser from booking-v3's month-first hint on a day-first form. Deduplicate by
@@ -35,8 +35,10 @@ report ID; matching subjects alone do not establish a shared cause.</p>
 describe one-day discrepancies. R-41236 instead says the invite arrived before the booking and
 needs its own chronology investigation. No timezone root cause has been demonstrated.</p>
 <p>The five exceptions remain part of the original ticket's mechanically computed parser group;
-the report files exclude them from that group's issue count to avoid double counting.
-This is a provisional triage split, not proof of four independent root causes.</p>
+the parser issue retains all 379 reports, while the hint issue covers 33. The four one-day reports
+and one chronology report are overlapping investigation subsets, not additional reports.
+379 + 33 = 412 unique reports. The auxiliary disjoint triage view is 374/33/4/1; it is not the desk's issue count
+and does not prove four independent root causes.</p>
 <h2>Evidence and follow-up</h2>
 <p><a href="https://github.com/kriss94/mega/tree/main/s01e03/reports">Report bodies, ID mapping and reproducible analysis</a>
 are preserved alongside the export. Run <code>node s01e03/analyze.mjs</code> at the repository root to verify

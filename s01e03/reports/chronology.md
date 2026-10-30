@@ -4,7 +4,7 @@ Source: merged ticket #4471, KB export dated 2026-10-04.
 
 **Reports covered: 1 unique report.**
 
-R-41236 says the invite arrived before the booking was made. It is listed in oneDayMove but does not state a one-day difference. Chronology, delayed messages or misunderstanding remain unverified.
+R-41236 says the invite arrived before the booking was made. It is listed in oneDayMove but does not state a one-day difference. Chronology, delayed messages or misunderstanding remain unverified. This report remains in the 379-report parser issue; this investigation overlaps it and adds no report to the total.
 
 ## Verification / investigation
 

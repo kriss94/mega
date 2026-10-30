@@ -36,3 +36,15 @@
 - Student confirmed no newer material and approved the reviewed changes and course submission.
 - Created issues #1 parser (374), #2 hint (33), #3 one-day investigation (4), #4 chronology investigation (1) in kriss94/mega; URLs in reports/issue-urls.json and KB/docs.
 - Publishing approved S01E03 files and submitting via MCP next. Not complete pending explicit course acceptance.
+
+## Course verdict after publication
+- Published commit aeb7468, issues https://github.com/kriss94/mega/issues/1 through /4.
+- claim-challenge rejected: “Not accepted. Check your tickets against the task, then send the repo again.” Desk hint: “Right problems. The desk counts with its own view, as it was exported.”
+- Proposed response: restore exported issue counts 379 parser / 33 hint and describe 4/1 investigations as overlapping subsets; preserve 374/33/4/1 only as auxiliary triage. See reports/count-correction.md.
+- Awaiting approval for the revised GitHub scope. No corrective GitHub edits made. Course not complete.
+
+## Counting correction approved and applied
+- Student approved exported counts 379 parser / 33 hint, with 4/1 as overlapping investigations. Updated issues #1, #3, #4; #2 unchanged at 33.
+- Generator now records issueGroups for coverage and retains disjoint groups as auxiliary triage. KB source/component/static page and report documentation reflect overlap.
+- Checks: generator asserts 379/33 and 412-ID union; static renderer asserts counts and signature-derived stamp; git diff --check.
+- Next: publish correction and resubmit; not complete without acceptance.
