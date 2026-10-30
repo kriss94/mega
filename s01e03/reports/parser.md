@@ -1,0 +1,396 @@
+# Shared month-first parser swaps day and month
+
+Source: merged ticket #4471, KB export dated 2026-10-04.
+
+**Reports covered: 374 unique reports.**
+
+The shared parser reads month first for day-first tenants. The export attributes these reports using tenant locale and channel, not intake tags. Five contradictory reports are excluded into separate investigation groups.
+
+## Verification / investigation
+
+Use a day-first tenant through app/email or booking-v2; enter an unambiguous intended day/month combination such as 7 April. Check whether the invite becomes 4 July. Expected: preserve the intended date.
+
+## Evidence
+
+- Source records: ../export/support-kb/src/lib/data/reports-4471.json
+- Attribution logic: ../export/support-kb/src/lib/kb/causes.ts and tenant JSON records
+- Anomaly index: ../export/support-kb/src/lib/data/desk-notes.json
+- Full ID mapping: reconciliation.json
+- No product runtime or live desk update source was available. Counts describe this export only.
+
+## Report records
+
+- **R-41200** — harbour.dental; app; received 2026-04-01T09:12:00+01:00; intake tag parser. Our 7 April reminder went out on 4 July. Is this a joke. It is not April Fools where we are.
+- **R-41201** — harbour.dental; app; received 2026-04-01T09:34:00+01:00; intake tag parser. Sorry. 4 July went out on 7 April. I have been up since five.
+- **R-41203** — lantern.row; app; received 2026-04-03T12:14:00+02:00; intake tag parser. Booked for 2 December. The invite says 12 February.
+- **R-41204** — kettle.books; email; received 2026-04-04T21:55:00+02:00; intake tag parser. Invite says Thursday 10 December. We agreed Monday 12 October. Which one do I trust?
+- **R-41205** — morrow.tax; app; received 2026-04-05T12:29:00+02:00; intake tag hint. Customer booked 3 October and got an invite for 10 March. Please look at this.
+- **R-41206** — long.table; app; received 2026-04-05T16:54:00+02:00; intake tag parser. Second time this month: 4 March turned into 3 April.
+- **R-41208** — ridge.clinic; email; received 2026-04-06T14:52:00+02:00; intake tag parser. Booked for 2 March. The invite says 3 February.
+- **R-41210** — long.table; app; received 2026-04-07T08:53:00+02:00; intake tag parser. Second time this month: 12 April turned into 4 December.
+- **R-41211** — pale.harbour; app; received 2026-04-07T09:28:00+01:00; intake tag parser. The reminder for 5 March arrived for 3 May.
+- **R-41212** — harbour.dental; app; received 2026-04-07T10:22:00+01:00; intake tag parser. Every booking we make shows the wrong day. 8 December is now 12 August.
+- **R-41213** — kettle.books; email; received 2026-04-07T17:14:00+02:00; intake tag parser. Monday 1 June showed as Tuesday 6 January. I moved it myself.
+- **R-41214** — copper.studio; email; received 2026-04-08T18:22:00+02:00; intake tag parser. Invite says Thursday 9 July. We agreed Monday 7 September. Which one do I trust?
+- **R-41215** — kettle.books; app; received 2026-04-08T19:23:00+02:00; intake tag parser. My client came on 3 February instead of 2 March. We sorted it out.
+- **R-41216** — nine.lanterns; app; received 2026-04-11T12:34:00+02:00; intake tag parser. We had two people show up on 5 December. They were booked for 12 May.
+- **R-41217** — ridge.clinic; email; received 2026-04-12T15:23:00+02:00; intake tag parser. The reminder for 9 May arrived for 5 September.
+- **R-41218** — pale.harbour; email; received 2026-04-12T18:55:00+01:00; intake tag parser. Customer booked 6 November and got an invite for 11 June. Please look at this.
+- **R-41219** — harbour.dental; app; received 2026-04-13T13:46:00+01:00; intake tag parser. Thursday 12 March showed as Thursday 3 December. I moved it myself.
+- **R-41220** — nine.lanterns; app; received 2026-04-13T18:08:00+02:00; intake tag parser. We had two people show up on 5 June. They were booked for 6 May.
+- **R-41221** — long.table; email; received 2026-04-13T21:27:00+02:00; intake tag parser. Booked for 2 July. The invite says 7 February.
+- **R-41222** — pale.harbour; app; received 2026-04-14T17:49:00+01:00; intake tag parser. Customer booked 1 October and got an invite for 10 January. Please look at this.
+- **R-41223** — long.table; email; received 2026-04-14T19:08:00+02:00; intake tag parser. Tuesday 8 December showed as Wednesday 12 August. I moved it myself.
+- **R-41224** — morrow.tax; email; received 2026-04-17T13:50:00+02:00; intake tag parser. Every booking we make shows the wrong day. 10 September is now 9 October.
+- **R-41225** — alder.physio; email; received 2026-04-17T14:02:00+02:00; intake tag parser. The reminder for 3 May arrived for 5 March.
+- **R-41227** — harbour.dental; app; received 2026-04-17T14:23:00+01:00; intake tag parser. We had two people show up on 2 June. They were booked for 6 February.
+- **R-41228** — long.table; app; received 2026-04-17T17:27:00+02:00; intake tag parser. Customer booked 2 July and got an invite for 7 February. Please look at this.
+- **R-41229** — harbour.dental; app; received 2026-04-17T20:59:00+01:00; intake tag parser. Every booking we make shows the wrong day. 5 March is now 3 May.
+- **R-41231** — long.table; app; received 2026-04-18T11:22:00+02:00; intake tag parser. Second time this month: 8 January turned into 1 August.
+- **R-41232** — harbour.dental; app; received 2026-04-19T13:15:00+01:00; intake tag parser. Second time this month: 6 January turned into 1 June.
+- **R-41233** — nine.lanterns; email; received 2026-04-19T21:27:00+02:00; intake tag parser. We had two people show up on 10 November. They were booked for 11 October.
+- **R-41234** — pale.harbour; app; received 2026-04-20T07:46:00+01:00; intake tag parser. Every booking we make shows the wrong day. 1 March is now 3 January.
+- **R-41235** — ridge.clinic; app; received 2026-04-20T10:50:00+02:00; intake tag parser. Second time this month: 2 May turned into 5 February.
+- **R-41237** — pale.harbour; app; received 2026-04-20T21:02:00+01:00; intake tag parser. The reminder for 12 January arrived for 1 December.
+- **R-41238** — alder.physio; app; received 2026-04-20T22:16:00+02:00; intake tag parser. Every booking we make shows the wrong day. 8 March is now 3 August.
+- **R-41239** — kettle.books; form; received 2026-04-21T10:21:00+02:00; intake tag parser. The reminder for 8 November arrived for 11 August.
+- **R-41240** — morrow.tax; form; received 2026-04-21T12:34:00+02:00; intake tag parser. Second time this month: 7 February turned into 2 July.
+- **R-41242** — copper.studio; app; received 2026-04-22T14:50:00+02:00; intake tag parser. The reminder for 5 October arrived for 10 May.
+- **R-41243** — harbour.dental; app; received 2026-04-22T21:56:00+01:00; intake tag parser. My client came on 5 October instead of 10 May. We sorted it out.
+- **R-41244** — lantern.row; email; received 2026-04-23T13:35:00+02:00; intake tag parser. Second time this month: 1 December turned into 12 January.
+- **R-41245** — ridge.clinic; app; received 2026-04-23T18:38:00+02:00; intake tag parser. My client came on 10 November instead of 11 October. We sorted it out.
+- **R-41246** — stone.and.sons; form; received 2026-04-24T10:27:00+01:00; intake tag parser. We had two people show up on 12 June. They were booked for 6 December.
+- **R-41247** — long.table; app; received 2026-04-24T12:30:00+02:00; intake tag parser. Customer booked 11 March and got an invite for 3 November. Please look at this.
+- **R-41248** — long.table; form; received 2026-04-24T15:13:00+02:00; intake tag parser. Invite says Wednesday 5 August. We agreed Friday 8 May. Which one do I trust?
+- **R-41249** — morrow.tax; email; received 2026-04-24T19:27:00+02:00; intake tag parser. My client came on 10 November instead of 11 October. We sorted it out.
+- **R-41250** — stone.and.sons; email; received 2026-04-24T19:35:00+01:00; intake tag parser. Booked for 10 December. The invite says 12 October.
+- **R-41252** — nine.lanterns; email; received 2026-04-26T15:56:00+02:00; intake tag parser. The reminder for 3 January arrived for 1 March.
+- **R-41253** — harbour.dental; email; received 2026-04-27T13:56:00+01:00; intake tag parser. My client came on 4 February instead of 2 April. We sorted it out.
+- **R-41254** — stone.and.sons; app; received 2026-04-28T20:08:00+01:00; intake tag parser. The reminder for 8 April arrived for 4 August.
+- **R-41255** — kettle.books; email; received 2026-04-29T13:22:00+02:00; intake tag parser. Customer booked 6 December and got an invite for 12 June. Please look at this.
+- **R-41256** — long.table; form; received 2026-04-29T16:38:00+02:00; intake tag parser. My client came on 6 July instead of 7 June. We sorted it out.
+- **R-41257** — harbour.dental; email; received 2026-04-30T09:53:00+01:00; intake tag parser. Every booking we make shows the wrong day. 12 August is now 8 December.
+- **R-41258** — ridge.clinic; email; received 2026-05-01T11:08:00+02:00; intake tag parser. We had two people show up on 9 December. They were booked for 12 September.
+- **R-41260** — harbour.dental; app; received 2026-05-01T21:18:00+01:00; intake tag parser. Second time this month: 1 November turned into 11 January.
+- **R-41261** — lantern.row; email; received 2026-05-02T10:47:00+02:00; intake tag parser. Booked for 2 September. The invite says 9 February.
+- **R-41263** — stone.and.sons; email; received 2026-05-02T15:49:00+01:00; intake tag parser. The reminder for 3 February arrived for 2 March.
+- **R-41264** — alder.physio; email; received 2026-05-02T18:18:00+02:00; intake tag parser. Invite says Sunday 5 April. We agreed Monday 4 May. Which one do I trust?
+- **R-41265** — long.table; form; received 2026-05-03T08:12:00+02:00; intake tag parser. The reminder for 7 August arrived for 8 July.
+- **R-41266** — copper.studio; email; received 2026-05-03T11:40:00+02:00; intake tag parser. Every booking we make shows the wrong day. 12 November is now 11 December.
+- **R-41267** — kettle.books; app; received 2026-05-03T14:36:00+02:00; intake tag parser. The calendar invite for 12 November landed on 11 December. Nobody here touched it.
+- **R-41268** — stone.and.sons; email; received 2026-05-03T16:23:00+01:00; intake tag parser. The reminder for 5 February arrived for 2 May.
+- **R-41269** — lantern.row; email; received 2026-05-04T14:49:00+02:00; intake tag parser. Second time this month: 5 August turned into 8 May.
+- **R-41270** — morrow.tax; app; received 2026-05-04T16:03:00+02:00; intake tag parser. Our 5 June invoice meeting is shown as 6 May. We paid someone on the wrong day because of this. Not your problem. Noting it.
+- **R-41271** — nine.lanterns; email; received 2026-05-04T16:33:00+02:00; intake tag hint. Second time this month: 12 January turned into 1 December.
+- **R-41272** — lantern.row; app; received 2026-05-04T21:05:00+02:00; intake tag parser. We had two people show up on 12 January. They were booked for 1 December.
+- **R-41273** — ridge.clinic; app; received 2026-05-07T10:16:00+02:00; intake tag parser. Saturday 3 January showed as Sunday 1 March. I moved it myself.
+- **R-41274** — nine.lanterns; app; received 2026-05-07T15:27:00+02:00; intake tag parser. Friday 7 August showed as Wednesday 8 July. I moved it myself.
+- **R-41276** — morrow.tax; app; received 2026-05-08T12:58:00+02:00; intake tag parser. Customer booked 11 June and got an invite for 6 November. Please look at this.
+- **R-41277** — ridge.clinic; email; received 2026-05-08T17:43:00+02:00; intake tag parser. The reminder for 11 January arrived for 1 November.
+- **R-41278** — morrow.tax; app; received 2026-05-08T18:54:00+02:00; intake tag parser. Invite says Thursday 10 September. We agreed Friday 9 October. Which one do I trust?
+- **R-41279** — nine.lanterns; email; received 2026-05-08T19:21:00+02:00; intake tag parser. Second time this month: 6 November turned into 11 June.
+- **R-41280** — harbour.dental; app; received 2026-05-10T16:29:00+01:00; intake tag parser. Every booking we make shows the wrong day. 11 January is now 1 November.
+- **R-41281** — alder.physio; email; received 2026-05-11T09:44:00+02:00; intake tag parser. Booked for 7 June. The invite says 6 July.
+- **R-41282** — harbour.dental; app; received 2026-05-12T13:50:00+01:00; intake tag parser. Second time this month: 11 April turned into 4 November.
+- **R-41283** — stone.and.sons; app; received 2026-05-12T16:23:00+01:00; intake tag hint. My client came on 10 December instead of 12 October. We sorted it out.
+- **R-41284** — harbour.dental; email; received 2026-05-14T11:06:00+01:00; intake tag parser. Every booking we make shows the wrong day. 6 August is now 8 June.
+- **R-41285** — lantern.row; form; received 2026-05-14T22:27:00+02:00; intake tag parser. Booked for 1 December. The invite says 12 January.
+- **R-41286** — long.table; app; received 2026-05-17T09:27:00+02:00; intake tag parser. Invite says Monday 9 November. We agreed Friday 11 September. Which one do I trust?
+- **R-41287** — nine.lanterns; app; received 2026-05-17T17:10:00+02:00; intake tag parser. Second time this month: 8 February turned into 2 August.
+- **R-41288** — kettle.books; app; received 2026-05-17T21:53:00+02:00; intake tag parser. Customer booked 7 October and got an invite for 10 July. Please look at this.
+- **R-41289** — harbour.dental; app; received 2026-05-18T15:42:00+01:00; intake tag parser. Every booking we make shows the wrong day. 7 August is now 8 July.
+- **R-41290** — long.table; app; received 2026-05-19T13:44:00+02:00; intake tag parser. Is there a setting for "my country writes the day first". I have looked. I would pay for it.
+- **R-41291** — pale.harbour; email; received 2026-05-20T09:56:00+01:00; intake tag parser. The calendar invite for 12 February landed on 2 December. Nobody here touched it.
+- **R-41292** — harbour.dental; form; received 2026-05-20T14:29:00+01:00; intake tag hint. Tuesday 10 November showed as Sunday 11 October. I moved it myself.
+- **R-41293** — pale.harbour; email; received 2026-05-20T21:10:00+01:00; intake tag parser. Customer booked 1 September and got an invite for 9 January. Please look at this.
+- **R-41295** — nine.lanterns; app; received 2026-05-22T20:49:00+02:00; intake tag parser. Invite says Monday 2 March. We agreed Tuesday 3 February. Which one do I trust?
+- **R-41296** — copper.studio; email; received 2026-05-23T18:39:00+02:00; intake tag parser. Invite says Monday 6 July. We agreed Sunday 7 June. Which one do I trust?
+- **R-41297** — harbour.dental; email; received 2026-05-23T21:58:00+01:00; intake tag parser. Customer booked 7 June and got an invite for 6 July. Please look at this.
+- **R-41298** — ridge.clinic; email; received 2026-05-24T14:52:00+02:00; intake tag parser. The reminder for 12 January arrived for 1 December.
+- **R-41299** — stone.and.sons; email; received 2026-05-24T14:39:00+01:00; intake tag parser. We had two people show up on 9 October. They were booked for 10 September.
+- **R-41300** — long.table; email; received 2026-05-24T22:57:00+02:00; intake tag parser. Booked for 12 October. The invite says 10 December.
+- **R-41301** — harbour.dental; email; received 2026-05-26T09:53:00+01:00; intake tag parser. Booked for 2 July. The invite says 7 February.
+- **R-41302** — lantern.row; email; received 2026-05-26T18:23:00+02:00; intake tag parser. The reminder for 5 November arrived for 11 May.
+- **R-41303** — long.table; app; received 2026-05-27T08:55:00+02:00; intake tag parser. Booked for 8 November. The invite says 11 August.
+- **R-41304** — lantern.row; form; received 2026-05-27T09:16:00+02:00; intake tag parser. The calendar invite for 8 January landed on 1 August. Nobody here touched it.
+- **R-41306** — harbour.dental; email; received 2026-05-27T14:19:00+01:00; intake tag parser. Thursday 10 December showed as Monday 12 October. I moved it myself.
+- **R-41309** — long.table; app; received 2026-05-28T17:27:00+02:00; intake tag parser. Thursday 8 January showed as Saturday 1 August. I moved it myself.
+- **R-41310** — morrow.tax; app; received 2026-05-29T21:44:00+02:00; intake tag parser. The calendar invite for 12 July landed on 7 December. Nobody here touched it.
+- **R-41311** — alder.physio; email; received 2026-05-30T10:55:00+02:00; intake tag parser. Booked for 8 May. The invite says 5 August.
+- **R-41312** — pale.harbour; app; received 2026-05-30T20:00:00+01:00; intake tag parser. We had two people show up on 4 June. They were booked for 6 April.
+- **R-41313** — long.table; app; received 2026-05-31T09:05:00+02:00; intake tag parser. Customer booked 11 May and got an invite for 5 November. Please look at this.
+- **R-41314** — nine.lanterns; app; received 2026-05-31T13:28:00+02:00; intake tag parser. Booked for 8 April. The invite says 4 August.
+- **R-41315** — ridge.clinic; email; received 2026-05-31T19:21:00+02:00; intake tag parser. The calendar invite for 1 November landed on 11 January. Nobody here touched it.
+- **R-41316** — harbour.dental; app; received 2026-06-01T18:59:00+01:00; intake tag parser. Friday 2 October showed as Tuesday 10 February. I moved it myself.
+- **R-41317** — stone.and.sons; app; received 2026-06-01T20:05:00+01:00; intake tag parser. Second time this month: 1 September turned into 9 January.
+- **R-41318** — lantern.row; app; received 2026-06-02T22:28:00+02:00; intake tag parser. Every booking we make shows the wrong day. 12 November is now 11 December.
+- **R-41319** — harbour.dental; email; received 2026-06-03T12:43:00+01:00; intake tag parser. Invite says Wednesday 4 November. We agreed Saturday 11 April. Which one do I trust?
+- **R-41320** — harbour.dental; app; received 2026-06-04T15:35:00+01:00; intake tag parser. We had two people show up on 5 November. They were booked for 11 May.
+- **R-41321** — harbour.dental; form; received 2026-06-04T16:56:00+01:00; intake tag parser. Customer booked 12 May and got an invite for 5 December. Please look at this.
+- **R-41322** — lantern.row; app; received 2026-06-05T09:57:00+02:00; intake tag parser. My client came on 10 December instead of 12 October. We sorted it out.
+- **R-41323** — morrow.tax; form; received 2026-06-05T12:35:00+02:00; intake tag parser. The reminder for 12 August arrived for 8 December.
+- **R-41324** — kettle.books; app; received 2026-06-05T16:33:00+02:00; intake tag parser. Customer booked 4 December and got an invite for 12 April. Please look at this.
+- **R-41325** — copper.studio; app; received 2026-06-05T22:13:00+02:00; intake tag parser. The reminder for 12 June arrived for 6 December.
+- **R-41327** — morrow.tax; email; received 2026-06-06T08:52:00+02:00; intake tag parser. My client came on 9 January instead of 1 September. We sorted it out.
+- **R-41328** — morrow.tax; app; received 2026-06-06T20:06:00+02:00; intake tag parser. My client came on 2 May instead of 5 February. We sorted it out.
+- **R-41329** — harbour.dental; app; received 2026-06-07T11:27:00+01:00; intake tag parser. The calendar invite for 12 November landed on 11 December. Nobody here touched it.
+- **R-41330** — alder.physio; app; received 2026-06-07T16:11:00+02:00; intake tag parser. Customer booked 7 April and got an invite for 4 July. Please look at this.
+- **R-41331** — alder.physio; email; received 2026-06-07T17:36:00+02:00; intake tag parser. Customer booked 2 April and got an invite for 4 February. Please look at this.
+- **R-41332** — nine.lanterns; app; received 2026-06-07T20:06:00+02:00; intake tag parser. We had two people show up on 1 September. They were booked for 9 January.
+- **R-41333** — long.table; email; received 2026-06-07T22:08:00+02:00; intake tag parser. Saturday 12 September showed as Wednesday 9 December. I moved it myself.
+- **R-41334** — lantern.row; app; received 2026-06-08T10:59:00+02:00; intake tag parser. My client came on 2 May instead of 5 February. We sorted it out.
+- **R-41335** — ridge.clinic; email; received 2026-06-08T20:22:00+02:00; intake tag parser. The calendar invite for 9 October landed on 10 September. Nobody here touched it.
+- **R-41336** — kettle.books; app; received 2026-06-08T20:25:00+02:00; intake tag parser. Tuesday 12 May showed as Saturday 5 December. I moved it myself.
+- **R-41337** — ridge.clinic; email; received 2026-06-08T21:27:00+02:00; intake tag parser. We had two people show up on 8 June. They were booked for 6 August.
+- **R-41338** — kettle.books; app; received 2026-06-09T08:51:00+02:00; intake tag parser. Saturday 7 February showed as Thursday 2 July. I moved it myself.
+- **R-41339** — morrow.tax; form; received 2026-06-09T22:38:00+02:00; intake tag hint. The calendar invite for 5 March landed on 3 May. Nobody here touched it.
+- **R-41340** — morrow.tax; app; received 2026-06-10T18:22:00+02:00; intake tag parser. Invite says Sunday 9 August. We agreed Tuesday 8 September. Which one do I trust?
+- **R-41341** — nine.lanterns; app; received 2026-06-10T22:43:00+02:00; intake tag parser. The calendar invite for 9 June landed on 6 September. Nobody here touched it.
+- **R-41342** — stone.and.sons; email; received 2026-06-11T08:32:00+01:00; intake tag parser. Every booking we make shows the wrong day. 4 March is now 3 April.
+- **R-41343** — long.table; email; received 2026-06-11T15:23:00+02:00; intake tag parser. The calendar invite for 6 May landed on 5 June. Nobody here touched it.
+- **R-41345** — ridge.clinic; app; received 2026-06-12T22:52:00+02:00; intake tag parser. Customer booked 9 February and got an invite for 2 September. Please look at this.
+- **R-41346** — nine.lanterns; app; received 2026-06-13T13:25:00+02:00; intake tag parser. Booked for 11 January. The invite says 1 November.
+- **R-41347** — morrow.tax; app; received 2026-06-13T17:11:00+02:00; intake tag parser. Second time this month: 1 July turned into 7 January.
+- **R-41348** — morrow.tax; app; received 2026-06-14T12:50:00+02:00; intake tag parser. The reminder for 10 July arrived for 7 October.
+- **R-41349** — ridge.clinic; form; received 2026-06-14T14:49:00+02:00; intake tag parser. Thursday 10 September showed as Friday 9 October. I moved it myself.
+- **R-41350** — kettle.books; email; received 2026-06-15T16:29:00+02:00; intake tag parser. Second time this month: 2 June turned into 6 February.
+- **R-41351** — nine.lanterns; app; received 2026-06-16T08:43:00+02:00; intake tag parser. Every booking we make shows the wrong day. 11 February is now 2 November.
+- **R-41352** — ridge.clinic; app; received 2026-06-16T10:44:00+02:00; intake tag parser. Second time this month: 5 March turned into 3 May.
+- **R-41353** — alder.physio; email; received 2026-06-16T10:46:00+02:00; intake tag parser. Every booking we make shows the wrong day. 3 August is now 8 March.
+- **R-41354** — long.table; app; received 2026-06-16T15:49:00+02:00; intake tag hint. The calendar invite for 8 June landed on 6 August. Nobody here touched it.
+- **R-41355** — copper.studio; app; received 2026-06-16T20:42:00+02:00; intake tag parser. Customer booked 6 November and got an invite for 11 June. Please look at this.
+- **R-41356** — harbour.dental; app; received 2026-06-17T12:32:00+01:00; intake tag parser. Wednesday 5 August showed as Friday 8 May. I moved it myself.
+- **R-41357** — kettle.books; app; received 2026-06-17T14:48:00+02:00; intake tag parser. Wednesday 1 July showed as Wednesday 7 January. I moved it myself.
+- **R-41358** — harbour.dental; email; received 2026-06-17T21:40:00+01:00; intake tag parser. The reminder for 1 July arrived for 7 January.
+- **R-41359** — ridge.clinic; email; received 2026-06-18T08:01:00+02:00; intake tag parser. Invite says Friday 4 September. We agreed Thursday 9 April. Which one do I trust?
+- **R-41360** — lantern.row; email; received 2026-06-18T11:29:00+02:00; intake tag parser. We had two people show up on 4 October. They were booked for 10 April.
+- **R-41361** — harbour.dental; email; received 2026-06-18T21:08:00+01:00; intake tag parser. The calendar invite for 1 August landed on 8 January. Nobody here touched it.
+- **R-41362** — morrow.tax; email; received 2026-06-19T13:21:00+02:00; intake tag parser. Customer booked 12 February and got an invite for 2 December. Please look at this.
+- **R-41363** — nine.lanterns; email; received 2026-06-19T14:27:00+02:00; intake tag parser. My client came on 12 January instead of 1 December. We sorted it out.
+- **R-41364** — ridge.clinic; email; received 2026-06-20T14:19:00+02:00; intake tag parser. We had two people show up on 10 January. They were booked for 1 October.
+- **R-41365** — morrow.tax; app; received 2026-06-20T21:21:00+02:00; intake tag parser. Invite says Tuesday 4 August. We agreed Wednesday 8 April. Which one do I trust?
+- **R-41367** — kettle.books; app; received 2026-06-22T12:14:00+02:00; intake tag parser. Wednesday 11 March showed as Tuesday 3 November. I moved it myself.
+- **R-41368** — long.table; app; received 2026-06-24T09:08:00+02:00; intake tag parser. We had two people show up on 9 April. They were booked for 4 September.
+- **R-41369** — nine.lanterns; form; received 2026-06-25T11:43:00+02:00; intake tag parser. Booked for 5 November. The invite says 11 May.
+- **R-41370** — pale.harbour; email; received 2026-06-25T11:59:00+01:00; intake tag hint. The calendar invite for 9 December landed on 12 September. Nobody here touched it.
+- **R-41371** — copper.studio; app; received 2026-06-25T15:06:00+02:00; intake tag parser. The calendar invite for 7 June landed on 6 July. Nobody here touched it.
+- **R-41373** — kettle.books; app; received 2026-06-26T09:18:00+02:00; intake tag parser. Booked for 7 March. The invite says 3 July.
+- **R-41374** — nine.lanterns; app; received 2026-06-26T09:57:00+02:00; intake tag parser. The reminder for 9 November arrived for 11 September.
+- **R-41375** — ridge.clinic; email; received 2026-06-27T11:13:00+02:00; intake tag parser. The calendar invite for 7 April landed on 4 July. Nobody here touched it.
+- **R-41376** — kettle.books; app; received 2026-06-27T19:29:00+02:00; intake tag parser. The reminder for 12 March arrived for 3 December.
+- **R-41377** — harbour.dental; email; received 2026-06-28T10:38:00+01:00; intake tag parser. Second time this month: 2 March turned into 3 February.
+- **R-41378** — long.table; app; received 2026-06-29T08:06:00+02:00; intake tag parser. The reminder for 7 February arrived for 2 July.
+- **R-41379** — harbour.dental; app; received 2026-06-30T08:21:00+01:00; intake tag parser. We had two people show up on 12 October. They were booked for 10 December.
+- **R-41380** — long.table; email; received 2026-06-30T10:27:00+02:00; intake tag parser. We had two people show up on 7 May. They were booked for 5 July.
+- **R-41381** — kettle.books; email; received 2026-06-30T16:46:00+02:00; intake tag parser. My client came on 10 February instead of 2 October. We sorted it out.
+- **R-41382** — alder.physio; app; received 2026-06-30T18:12:00+02:00; intake tag parser. Every booking we make shows the wrong day. 6 August is now 8 June.
+- **R-41383** — long.table; app; received 2026-07-01T13:45:00+02:00; intake tag hint. Monday 3 August showed as Sunday 8 March. I moved it myself.
+- **R-41385** — harbour.dental; app; received 2026-07-01T20:36:00+01:00; intake tag parser. Second time this month: 5 December turned into 12 May.
+- **R-41386** — harbour.dental; form; received 2026-07-01T21:52:00+01:00; intake tag parser. Second time this month: 10 August turned into 8 October.
+- **R-41388** — pale.harbour; email; received 2026-07-02T21:41:00+01:00; intake tag parser. Invite says Sunday 4 January. We agreed Wednesday 1 April. Which one do I trust?
+- **R-41389** — ridge.clinic; email; received 2026-07-03T19:42:00+02:00; intake tag parser. Wednesday 4 February showed as Thursday 2 April. I moved it myself.
+- **R-41390** — harbour.dental; app; received 2026-07-05T08:08:00+01:00; intake tag hint. We had two people show up on 9 August. They were booked for 8 September.
+- **R-41391** — copper.studio; email; received 2026-07-05T11:06:00+02:00; intake tag parser. The reminder for 12 October arrived for 10 December.
+- **R-41392** — ridge.clinic; app; received 2026-07-05T13:19:00+02:00; intake tag parser. The reminder for 3 February arrived for 2 March.
+- **R-41393** — kettle.books; email; received 2026-07-06T12:22:00+02:00; intake tag parser. The reminder for 1 July arrived for 7 January.
+- **R-41394** — morrow.tax; app; received 2026-07-06T13:12:00+02:00; intake tag parser. We had two people show up on 1 September. They were booked for 9 January.
+- **R-41395** — ridge.clinic; app; received 2026-07-07T17:15:00+02:00; intake tag parser. Sunday 5 July showed as Thursday 7 May. I moved it myself.
+- **R-41397** — stone.and.sons; form; received 2026-07-07T19:05:00+01:00; intake tag parser. My client came on 4 December instead of 12 April. We sorted it out.
+- **R-41398** — ridge.clinic; app; received 2026-07-07T22:47:00+02:00; intake tag parser. The calendar invite for 7 June landed on 6 July. Nobody here touched it.
+- **R-41399** — ridge.clinic; email; received 2026-07-08T12:03:00+02:00; intake tag parser. The reminder for 2 March arrived for 3 February.
+- **R-41401** — copper.studio; app; received 2026-07-09T16:13:00+02:00; intake tag parser. We had two people show up on 10 June. They were booked for 6 October.
+- **R-41402** — pale.harbour; app; received 2026-07-10T13:17:00+01:00; intake tag parser. The reminder for 4 September arrived for 9 April.
+- **R-41403** — copper.studio; app; received 2026-07-10T16:32:00+02:00; intake tag parser. The reminder for 7 February arrived for 2 July.
+- **R-41404** — harbour.dental; email; received 2026-07-10T15:56:00+01:00; intake tag parser. My client came on 1 February instead of 2 January. We sorted it out.
+- **R-41405** — kettle.books; email; received 2026-07-11T15:22:00+02:00; intake tag parser. Every booking we make shows the wrong day. 1 October is now 10 January.
+- **R-41408** — kettle.books; app; received 2026-07-12T14:40:00+02:00; intake tag parser. Every booking we make shows the wrong day. 12 November is now 11 December.
+- **R-41409** — kettle.books; app; received 2026-07-12T14:52:00+02:00; intake tag parser. My client came on 4 June instead of 6 April. We sorted it out.
+- **R-41410** — morrow.tax; form; received 2026-07-12T15:02:00+02:00; intake tag parser. Invite says Friday 2 October. We agreed Tuesday 10 February. Which one do I trust?
+- **R-41411** — nine.lanterns; email; received 2026-07-12T17:04:00+02:00; intake tag parser. Invite says Friday 7 August. We agreed Wednesday 8 July. Which one do I trust?
+- **R-41412** — nine.lanterns; form; received 2026-07-12T22:40:00+02:00; intake tag hint. Wednesday 8 July showed as Friday 7 August. I moved it myself.
+- **R-41413** — alder.physio; email; received 2026-07-13T16:27:00+02:00; intake tag parser. The reminder for 10 May arrived for 5 October.
+- **R-41414** — harbour.dental; email; received 2026-07-13T20:54:00+01:00; intake tag parser. Invite says Monday 6 July. We agreed Sunday 7 June. Which one do I trust?
+- **R-41417** — ridge.clinic; app; received 2026-07-14T14:21:00+02:00; intake tag parser. Your software sent my mother to the dentist on the wrong day. She went anyway. They fitted her in. This is not a complaint about the dentist.
+- **R-41419** — alder.physio; email; received 2026-07-15T17:57:00+02:00; intake tag parser. Booked for 9 August. The invite says 8 September.
+- **R-41420** — copper.studio; email; received 2026-07-15T21:14:00+02:00; intake tag parser. Invite says Monday 9 November. We agreed Friday 11 September. Which one do I trust?
+- **R-41421** — alder.physio; app; received 2026-07-15T22:49:00+02:00; intake tag parser. My client came on 7 August instead of 8 July. We sorted it out.
+- **R-41422** — kettle.books; app; received 2026-07-16T09:20:00+02:00; intake tag parser. Invite says Wednesday 6 May. We agreed Friday 5 June. Which one do I trust?
+- **R-41423** — nine.lanterns; app; received 2026-07-16T12:00:00+02:00; intake tag parser. We had two people show up on 10 August. They were booked for 8 October.
+- **R-41424** — alder.physio; app; received 2026-07-16T20:03:00+02:00; intake tag hint. Customer booked 4 August and got an invite for 8 April. Please look at this.
+- **R-41425** — lantern.row; email; received 2026-07-16T22:17:00+02:00; intake tag parser. Invite says Thursday 8 January. We agreed Saturday 1 August. Which one do I trust?
+- **R-41427** — lantern.row; email; received 2026-07-18T18:09:00+02:00; intake tag parser. We had two people show up on 7 October. They were booked for 10 July.
+- **R-41429** — alder.physio; app; received 2026-07-19T15:45:00+02:00; intake tag parser. Booked for 5 December. The invite says 12 May.
+- **R-41430** — lantern.row; app; received 2026-07-19T22:06:00+02:00; intake tag parser. Tuesday 1 September showed as Friday 9 January. I moved it myself.
+- **R-41431** — harbour.dental; app; received 2026-07-20T12:27:00+01:00; intake tag parser. Invite says Friday 10 April. We agreed Sunday 4 October. Which one do I trust?
+- **R-41432** — lantern.row; app; received 2026-07-20T15:14:00+02:00; intake tag parser. Monday 12 January showed as Tuesday 1 December. I moved it myself.
+- **R-41433** — harbour.dental; app; received 2026-07-21T13:32:00+01:00; intake tag parser. Customer booked 12 July and got an invite for 7 December. Please look at this.
+- **R-41434** — nine.lanterns; email; received 2026-07-21T18:41:00+02:00; intake tag hint. The reminder for 1 October arrived for 10 January.
+- **R-41435** — harbour.dental; email; received 2026-07-21T19:00:00+01:00; intake tag parser. Customer booked 7 October and got an invite for 10 July. Please look at this.
+- **R-41436** — morrow.tax; app; received 2026-07-21T21:40:00+02:00; intake tag parser. Customer booked 2 January and got an invite for 1 February. Please look at this.
+- **R-41437** — stone.and.sons; app; received 2026-07-22T07:02:00+01:00; intake tag parser. Wednesday 4 March showed as Friday 3 April. I moved it myself.
+- **R-41438** — kettle.books; email; received 2026-07-22T11:54:00+02:00; intake tag parser. Wednesday 3 June showed as Friday 6 March. I moved it myself.
+- **R-41440** — morrow.tax; email; received 2026-07-23T16:06:00+02:00; intake tag parser. Booked for 1 November. The invite says 11 January.
+- **R-41442** — morrow.tax; email; received 2026-07-24T10:15:00+02:00; intake tag parser. Every booking we make shows the wrong day. 4 June is now 6 April.
+- **R-41443** — nine.lanterns; app; received 2026-07-24T12:28:00+02:00; intake tag parser. Second time this month: 10 May turned into 5 October.
+- **R-41444** — harbour.dental; app; received 2026-07-25T21:59:00+01:00; intake tag parser. Customer booked 2 May and got an invite for 5 February. Please look at this.
+- **R-41445** — lantern.row; email; received 2026-07-26T09:05:00+02:00; intake tag parser. Second time this month: 10 March turned into 3 October.
+- **R-41446** — copper.studio; app; received 2026-07-27T18:22:00+02:00; intake tag parser. We had two people show up on 6 May. They were booked for 5 June.
+- **R-41447** — nine.lanterns; app; received 2026-07-27T21:45:00+02:00; intake tag parser. My client came on 6 February instead of 2 June. We sorted it out.
+- **R-41448** — nine.lanterns; email; received 2026-07-28T09:48:00+02:00; intake tag parser. Tuesday 4 August showed as Wednesday 8 April. I moved it myself.
+- **R-41450** — kettle.books; app; received 2026-07-29T20:22:00+02:00; intake tag parser. Sunday 5 April showed as Monday 4 May. I moved it myself.
+- **R-41451** — ridge.clinic; email; received 2026-07-30T11:32:00+02:00; intake tag parser. We had two people show up on 6 August. They were booked for 8 June.
+- **R-41452** — kettle.books; email; received 2026-07-30T11:48:00+02:00; intake tag parser. We had two people show up on 2 October. They were booked for 10 February.
+- **R-41454** — lantern.row; app; received 2026-07-31T16:31:00+02:00; intake tag parser. The calendar invite for 10 June landed on 6 October. Nobody here touched it.
+- **R-41455** — kettle.books; email; received 2026-07-31T17:03:00+02:00; intake tag parser. My client came on 5 September instead of 9 May. We sorted it out.
+- **R-41457** — morrow.tax; app; received 2026-07-31T19:10:00+02:00; intake tag parser. Customer booked 6 February and got an invite for 2 June. Please look at this.
+- **R-41458** — morrow.tax; app; received 2026-08-01T08:35:00+02:00; intake tag parser. Customer booked 2 September and got an invite for 9 February. Please look at this.
+- **R-41459** — harbour.dental; app; received 2026-08-01T09:27:00+01:00; intake tag parser. Second time this month: 9 June turned into 6 September.
+- **R-41461** — long.table; email; received 2026-08-01T16:27:00+02:00; intake tag parser. We had two people show up on 5 March. They were booked for 3 May.
+- **R-41462** — harbour.dental; email; received 2026-08-01T16:35:00+01:00; intake tag parser. Every booking we make shows the wrong day. 8 April is now 4 August.
+- **R-41463** — stone.and.sons; app; received 2026-08-02T07:37:00+01:00; intake tag hint. Second time this month: 5 October turned into 10 May.
+- **R-41464** — morrow.tax; app; received 2026-08-02T14:27:00+02:00; intake tag parser. Invite says Friday 4 December. We agreed Sunday 12 April. Which one do I trust?
+- **R-41465** — pale.harbour; app; received 2026-08-04T07:55:00+01:00; intake tag parser. The calendar invite for 10 August landed on 8 October. Nobody here touched it.
+- **R-41466** — lantern.row; app; received 2026-08-04T22:44:00+02:00; intake tag parser. We had two people show up on 9 November. They were booked for 11 September.
+- **R-41467** — kettle.books; form; received 2026-08-05T14:32:00+02:00; intake tag parser. Saturday 10 January showed as Thursday 1 October. I moved it myself.
+- **R-41468** — nine.lanterns; app; received 2026-08-05T14:53:00+02:00; intake tag parser. Booked for 6 May. The invite says 5 June.
+- **R-41469** — harbour.dental; app; received 2026-08-05T13:59:00+01:00; intake tag parser. The reminder for 1 August arrived for 8 January.
+- **R-41470** — stone.and.sons; email; received 2026-08-06T11:37:00+01:00; intake tag hint. The calendar invite for 10 December landed on 12 October. Nobody here touched it.
+- **R-41471** — pale.harbour; app; received 2026-08-06T18:29:00+01:00; intake tag parser. Second time this month: 11 January turned into 1 November.
+- **R-41473** — nine.lanterns; email; received 2026-08-10T15:27:00+02:00; intake tag parser. Wednesday 1 July showed as Wednesday 7 January. I moved it myself.
+- **R-41474** — nine.lanterns; app; received 2026-08-11T11:28:00+02:00; intake tag parser. The calendar invite for 4 January landed on 1 April. Nobody here touched it.
+- **R-41475** — morrow.tax; app; received 2026-08-11T19:53:00+02:00; intake tag parser. Booked for 2 July. The invite says 7 February.
+- **R-41476** — nine.lanterns; app; received 2026-08-12T09:16:00+02:00; intake tag parser. Booked for 2 March. The invite says 3 February.
+- **R-41477** — kettle.books; email; received 2026-08-12T22:58:00+02:00; intake tag parser. Every booking we make shows the wrong day. 10 June is now 6 October.
+- **R-41478** — harbour.dental; email; received 2026-08-13T09:09:00+01:00; intake tag parser. We had two people show up on 3 June. They were booked for 6 March.
+- **R-41479** — long.table; app; received 2026-08-14T09:32:00+02:00; intake tag parser. Invite says Thursday 10 September. We agreed Friday 9 October. Which one do I trust?
+- **R-41480** — long.table; app; received 2026-08-14T14:24:00+02:00; intake tag parser. Monday 8 June showed as Thursday 6 August. I moved it myself.
+- **R-41481** — morrow.tax; email; received 2026-08-14T15:28:00+02:00; intake tag hint. We had two people show up on 12 January. They were booked for 1 December.
+- **R-41482** — pale.harbour; email; received 2026-08-14T14:59:00+01:00; intake tag parser. The reminder for 1 November arrived for 11 January.
+- **R-41483** — lantern.row; app; received 2026-08-14T17:27:00+02:00; intake tag parser. The reminder for 2 May arrived for 5 February.
+- **R-41484** — long.table; app; received 2026-08-14T17:28:00+02:00; intake tag parser. Thursday 8 January showed as Saturday 1 August. I moved it myself.
+- **R-41486** — kettle.books; app; received 2026-08-15T09:19:00+02:00; intake tag parser. Customer booked 5 December and got an invite for 12 May. Please look at this.
+- **R-41487** — nine.lanterns; email; received 2026-08-15T14:00:00+02:00; intake tag parser. The reminder for 10 September arrived for 9 October.
+- **R-41488** — kettle.books; app; received 2026-08-17T16:50:00+02:00; intake tag parser. Monday 6 July showed as Sunday 7 June. I moved it myself.
+- **R-41489** — kettle.books; app; received 2026-08-18T09:32:00+02:00; intake tag parser. The reminder for 5 April arrived for 4 May.
+- **R-41490** — ridge.clinic; app; received 2026-08-18T10:36:00+02:00; intake tag parser. We had two people show up on 6 February. They were booked for 2 June.
+- **R-41491** — ridge.clinic; app; received 2026-08-18T17:53:00+02:00; intake tag parser. Booked for 12 October. The invite says 10 December.
+- **R-41492** — lantern.row; email; received 2026-08-19T12:08:00+02:00; intake tag parser. Second time this month: 12 November turned into 11 December.
+- **R-41494** — alder.physio; app; received 2026-08-19T16:11:00+02:00; intake tag parser. Customer booked 3 November and got an invite for 11 March. Please look at this.
+- **R-41495** — stone.and.sons; app; received 2026-08-19T15:12:00+01:00; intake tag parser. Invite says Tuesday 10 February. We agreed Friday 2 October. Which one do I trust?
+- **R-41496** — nine.lanterns; email; received 2026-08-19T18:17:00+02:00; intake tag parser. Booked for 11 February. The invite says 2 November.
+- **R-41497** — morrow.tax; app; received 2026-08-19T22:37:00+02:00; intake tag parser. Second time this month: 12 November turned into 11 December.
+- **R-41498** — long.table; app; received 2026-08-20T14:10:00+02:00; intake tag parser. Second time this month: 9 August turned into 8 September.
+- **R-41499** — lantern.row; app; received 2026-08-20T16:53:00+02:00; intake tag hint. Second time this month: 3 June turned into 6 March.
+- **R-41500** — kettle.books; email; received 2026-08-20T22:53:00+02:00; intake tag parser. Second time this month: 6 February turned into 2 June.
+- **R-41501** — morrow.tax; email; received 2026-08-21T08:13:00+02:00; intake tag parser. Invite says Monday 7 September. We agreed Thursday 9 July. Which one do I trust?
+- **R-41502** — kettle.books; email; received 2026-08-21T09:49:00+02:00; intake tag parser. Thursday 5 March showed as Sunday 3 May. I moved it myself.
+- **R-41503** — copper.studio; app; received 2026-08-21T17:09:00+02:00; intake tag parser. My client came on 1 February instead of 2 January. We sorted it out.
+- **R-41504** — morrow.tax; app; received 2026-08-21T19:24:00+02:00; intake tag parser. Customer booked 9 November and got an invite for 11 September. Please look at this.
+- **R-41505** — morrow.tax; email; received 2026-08-22T12:08:00+02:00; intake tag hint. Customer booked 9 June and got an invite for 6 September. Please look at this.
+- **R-41506** — alder.physio; app; received 2026-08-22T14:21:00+02:00; intake tag parser. Invite says Friday 8 May. We agreed Wednesday 5 August. Which one do I trust?
+- **R-41508** — stone.and.sons; app; received 2026-08-22T18:19:00+01:00; intake tag hint. Booked for 12 July. The invite says 7 December.
+- **R-41509** — morrow.tax; app; received 2026-08-24T15:09:00+02:00; intake tag parser. Sunday 7 June showed as Monday 6 July. I moved it myself.
+- **R-41510** — lantern.row; app; received 2026-08-24T20:19:00+02:00; intake tag parser. Customer booked 12 March and got an invite for 3 December. Please look at this.
+- **R-41511** — long.table; email; received 2026-08-26T14:32:00+02:00; intake tag parser. Every booking we make shows the wrong day. 5 October is now 10 May.
+- **R-41512** — alder.physio; app; received 2026-08-26T21:51:00+02:00; intake tag hint. Monday 8 June showed as Thursday 6 August. I moved it myself.
+- **R-41513** — kettle.books; form; received 2026-08-26T22:28:00+02:00; intake tag hint. Second time this month: 2 September turned into 9 February.
+- **R-41514** — copper.studio; app; received 2026-08-27T17:35:00+02:00; intake tag parser. I have started telling clients the date in words. "The second Tuesday." It works. Your product is now a phone call.
+- **R-41515** — stone.and.sons; email; received 2026-08-27T20:34:00+01:00; intake tag parser. Booked for 6 April. The invite says 4 June.
+- **R-41516** — stone.and.sons; email; received 2026-08-28T07:30:00+01:00; intake tag hint. My client came on 7 December instead of 12 July. We sorted it out.
+- **R-41517** — lantern.row; email; received 2026-08-29T09:25:00+02:00; intake tag parser. Customer booked 10 September and got an invite for 9 October. Please look at this.
+- **R-41518** — lantern.row; app; received 2026-08-29T18:47:00+02:00; intake tag parser. My client came on 7 November instead of 11 July. We sorted it out.
+- **R-41519** — nine.lanterns; form; received 2026-08-29T19:02:00+02:00; intake tag hint. Invite says Friday 3 April. We agreed Wednesday 4 March. Which one do I trust?
+- **R-41520** — stone.and.sons; email; received 2026-08-29T19:09:00+01:00; intake tag parser. The calendar invite for 7 November landed on 11 July. Nobody here touched it.
+- **R-41521** — kettle.books; email; received 2026-08-30T11:29:00+02:00; intake tag parser. Customer booked 7 May and got an invite for 5 July. Please look at this.
+- **R-41522** — kettle.books; app; received 2026-08-30T14:29:00+02:00; intake tag parser. Customer booked 7 December and got an invite for 12 July. Please look at this.
+- **R-41523** — long.table; email; received 2026-08-31T11:17:00+02:00; intake tag parser. My client came on 11 July instead of 7 November. We sorted it out.
+- **R-41524** — copper.studio; app; received 2026-08-31T13:30:00+02:00; intake tag parser. The calendar invite for 11 October landed on 10 November. Nobody here touched it.
+- **R-41525** — lantern.row; email; received 2026-08-31T19:47:00+02:00; intake tag parser. Customer booked 12 January and got an invite for 1 December. Please look at this.
+- **R-41527** — long.table; app; received 2026-08-31T22:57:00+02:00; intake tag parser. We had two people show up on 9 October. They were booked for 10 September.
+- **R-41528** — long.table; app; received 2026-09-01T08:30:00+02:00; intake tag parser. Wednesday 7 January showed as Wednesday 1 July. I moved it myself.
+- **R-41529** — ridge.clinic; form; received 2026-09-01T20:06:00+02:00; intake tag parser. Booked for 5 November. The invite says 11 May.
+- **R-41530** — kettle.books; app; received 2026-09-01T20:56:00+02:00; intake tag parser. We had two people show up on 3 July. They were booked for 7 March.
+- **R-41531** — morrow.tax; app; received 2026-09-02T09:34:00+02:00; intake tag parser. Customer booked 3 August and got an invite for 8 March. Please look at this.
+- **R-41532** — pale.harbour; email; received 2026-09-02T09:00:00+01:00; intake tag parser. Booked for 5 August. The invite says 8 May.
+- **R-41533** — nine.lanterns; app; received 2026-09-03T12:19:00+02:00; intake tag parser. The calendar invite for 10 September landed on 9 October. Nobody here touched it.
+- **R-41534** — nine.lanterns; email; received 2026-09-03T19:14:00+02:00; intake tag parser. Saturday 5 December showed as Tuesday 12 May. I moved it myself.
+- **R-41535** — stone.and.sons; app; received 2026-09-03T20:34:00+01:00; intake tag parser. Booked for 5 August. The invite says 8 May.
+- **R-41536** — kettle.books; app; received 2026-09-04T13:31:00+02:00; intake tag parser. The reminder for 5 December arrived for 12 May.
+- **R-41537** — long.table; app; received 2026-09-04T14:11:00+02:00; intake tag parser. Saturday 10 January showed as Thursday 1 October. I moved it myself.
+- **R-41538** — long.table; app; received 2026-09-04T16:25:00+02:00; intake tag parser. Invite says Wednesday 4 February. We agreed Thursday 2 April. Which one do I trust?
+- **R-41540** — kettle.books; email; received 2026-09-05T13:58:00+02:00; intake tag parser. Invite says Tuesday 2 June. We agreed Friday 6 February. Which one do I trust?
+- **R-41541** — kettle.books; app; received 2026-09-06T10:14:00+02:00; intake tag parser. My client came on 10 January instead of 1 October. We sorted it out.
+- **R-41542** — ridge.clinic; form; received 2026-09-06T14:06:00+02:00; intake tag parser. The reminder for 11 May arrived for 5 November.
+- **R-41543** — alder.physio; app; received 2026-09-06T15:04:00+02:00; intake tag parser. Second time this month: 1 February turned into 2 January.
+- **R-41544** — harbour.dental; email; received 2026-09-06T17:10:00+01:00; intake tag parser. Sunday 10 May showed as Monday 5 October. I moved it myself.
+- **R-41545** — pale.harbour; app; received 2026-09-07T08:06:00+01:00; intake tag parser. Wednesday 6 May showed as Friday 5 June. I moved it myself.
+- **R-41546** — stone.and.sons; app; received 2026-09-07T09:00:00+01:00; intake tag parser. The calendar invite for 1 December landed on 12 January. Nobody here touched it.
+- **R-41547** — long.table; app; received 2026-09-07T21:27:00+02:00; intake tag parser. Every booking we make shows the wrong day. 8 November is now 11 August.
+- **R-41548** — stone.and.sons; app; received 2026-09-08T08:51:00+01:00; intake tag parser. My client came on 9 December instead of 12 September. We sorted it out.
+- **R-41549** — harbour.dental; app; received 2026-09-08T10:00:00+01:00; intake tag parser. Friday 3 July showed as Saturday 7 March. I moved it myself.
+- **R-41550** — ridge.clinic; app; received 2026-09-08T17:55:00+02:00; intake tag parser. Monday 7 September showed as Thursday 9 July. I moved it myself.
+- **R-41551** — kettle.books; email; received 2026-09-08T18:03:00+02:00; intake tag parser. Second time this month: 9 June turned into 6 September.
+- **R-41552** — ridge.clinic; email; received 2026-09-09T10:06:00+02:00; intake tag parser. We had two people show up on 5 January. They were booked for 1 May.
+- **R-41553** — stone.and.sons; app; received 2026-09-09T14:21:00+01:00; intake tag parser. Booked for 11 February. The invite says 2 November.
+- **R-41554** — morrow.tax; app; received 2026-09-09T17:50:00+02:00; intake tag parser. Customer booked 8 February and got an invite for 2 August. Please look at this.
+- **R-41555** — ridge.clinic; app; received 2026-09-10T15:00:00+02:00; intake tag parser. My client came on 1 November instead of 11 January. We sorted it out.
+- **R-41556** — pale.harbour; app; received 2026-09-10T21:14:00+01:00; intake tag parser. Invite says Tuesday 10 February. We agreed Friday 2 October. Which one do I trust?
+- **R-41557** — morrow.tax; email; received 2026-09-11T09:38:00+02:00; intake tag parser. The calendar invite for 4 October landed on 10 April. Nobody here touched it.
+- **R-41558** — kettle.books; email; received 2026-09-11T13:08:00+02:00; intake tag parser. The reminder for 4 June arrived for 6 April.
+- **R-41559** — stone.and.sons; email; received 2026-09-11T20:20:00+01:00; intake tag parser. Invite says Sunday 2 August. We agreed Sunday 8 February. Which one do I trust?
+- **R-41560** — long.table; app; received 2026-09-12T18:31:00+02:00; intake tag parser. Second time this month: 10 August turned into 8 October.
+- **R-41561** — alder.physio; email; received 2026-09-12T20:47:00+02:00; intake tag parser. Customer booked 1 April and got an invite for 4 January. Please look at this.
+- **R-41562** — stone.and.sons; app; received 2026-09-13T09:32:00+01:00; intake tag parser. We had two people show up on 9 October. They were booked for 10 September.
+- **R-41563** — morrow.tax; email; received 2026-09-13T12:54:00+02:00; intake tag parser. Customer booked 1 September and got an invite for 9 January. Please look at this.
+- **R-41564** — nine.lanterns; app; received 2026-09-13T17:15:00+02:00; intake tag parser. Booked for 7 August. The invite says 8 July.
+- **R-41565** — harbour.dental; app; received 2026-09-14T16:40:00+01:00; intake tag parser. Booked for 9 March. The invite says 3 September.
+- **R-41566** — pale.harbour; app; received 2026-09-14T17:31:00+01:00; intake tag parser. Second time this month: 7 June turned into 6 July.
+- **R-41567** — harbour.dental; app; received 2026-09-15T15:52:00+01:00; intake tag parser. Thursday 11 June showed as Friday 6 November. I moved it myself.
+- **R-41568** — alder.physio; app; received 2026-09-15T20:35:00+02:00; intake tag parser. Booked for 4 December. The invite says 12 April.
+- **R-41569** — morrow.tax; email; received 2026-09-16T13:14:00+02:00; intake tag parser. Booked for 10 February. The invite says 2 October.
+- **R-41570** — nine.lanterns; app; received 2026-09-17T12:08:00+02:00; intake tag parser. Second time this month: 1 June turned into 6 January.
+- **R-41571** — ridge.clinic; email; received 2026-09-17T13:08:00+02:00; intake tag parser. The reminder for 4 November arrived for 11 April.
+- **R-41573** — morrow.tax; email; received 2026-09-17T22:45:00+02:00; intake tag parser. The reminder for 3 February arrived for 2 March.
+- **R-41574** — long.table; email; received 2026-09-18T12:27:00+02:00; intake tag parser. Wednesday 12 August showed as Tuesday 8 December. I moved it myself.
+- **R-41575** — nine.lanterns; email; received 2026-09-18T12:46:00+02:00; intake tag parser. Thursday 2 July showed as Saturday 7 February. I moved it myself.
+- **R-41576** — kettle.books; email; received 2026-09-19T22:35:00+02:00; intake tag parser. Customer booked 12 January and got an invite for 1 December. Please look at this.
+- **R-41577** — nine.lanterns; email; received 2026-09-20T10:02:00+02:00; intake tag parser. The calendar invite for 8 June landed on 6 August. Nobody here touched it.
+- **R-41578** — nine.lanterns; email; received 2026-09-20T19:01:00+02:00; intake tag parser. Invite says Thursday 10 September. We agreed Friday 9 October. Which one do I trust?
+- **R-41579** — pale.harbour; email; received 2026-09-20T18:49:00+01:00; intake tag parser. The calendar invite for 1 March landed on 3 January. Nobody here touched it.
+- **R-41580** — harbour.dental; email; received 2026-09-21T08:29:00+01:00; intake tag parser. Saturday 5 December showed as Tuesday 12 May. I moved it myself.
+- **R-41581** — ridge.clinic; app; received 2026-09-22T12:37:00+02:00; intake tag parser. My client came on 10 May instead of 5 October. We sorted it out.
+- **R-41583** — nine.lanterns; app; received 2026-09-22T19:21:00+02:00; intake tag parser. My client came on 2 May instead of 5 February. We sorted it out.
+- **R-41585** — copper.studio; app; received 2026-09-22T20:01:00+02:00; intake tag parser. My client came on 11 January instead of 1 November. We sorted it out.
+- **R-41586** — kettle.books; app; received 2026-09-23T10:51:00+02:00; intake tag parser. Booked for 6 May. The invite says 5 June.
+- **R-41587** — harbour.dental; form; received 2026-09-23T14:33:00+01:00; intake tag parser. My client came on 4 December instead of 12 April. We sorted it out.
+- **R-41588** — copper.studio; app; received 2026-09-23T22:11:00+02:00; intake tag parser. The calendar invite for 5 March landed on 3 May. Nobody here touched it.
+- **R-41589** — harbour.dental; email; received 2026-09-24T11:34:00+01:00; intake tag parser. Every booking we make shows the wrong day. 4 August is now 8 April.
+- **R-41590** — stone.and.sons; email; received 2026-09-24T12:40:00+01:00; intake tag parser. Second time this month: 8 May turned into 5 August.
+- **R-41591** — harbour.dental; app; received 2026-09-24T19:45:00+01:00; intake tag parser. The reminder for 6 March arrived for 3 June.
+- **R-41592** — nine.lanterns; email; received 2026-09-24T22:01:00+02:00; intake tag parser. My client came on 3 November instead of 11 March. We sorted it out.
+- **R-41593** — copper.studio; email; received 2026-09-25T08:37:00+02:00; intake tag parser. Saturday 3 January showed as Sunday 1 March. I moved it myself.
+- **R-41594** — long.table; email; received 2026-09-25T12:58:00+02:00; intake tag parser. Customer booked 4 June and got an invite for 6 April. Please look at this.
+- **R-41595** — copper.studio; email; received 2026-09-25T16:43:00+02:00; intake tag parser. The calendar invite for 4 August landed on 8 April. Nobody here touched it.
+- **R-41596** — nine.lanterns; app; received 2026-09-26T09:05:00+02:00; intake tag parser. Invite says Sunday 8 November. We agreed Tuesday 11 August. Which one do I trust?
+- **R-41597** — pale.harbour; app; received 2026-09-26T09:25:00+01:00; intake tag hint. The calendar invite for 10 April landed on 4 October. Nobody here touched it.
+- **R-41598** — morrow.tax; app; received 2026-09-26T11:38:00+02:00; intake tag parser. Invite says Tuesday 1 December. We agreed Monday 12 January. Which one do I trust?
+- **R-41599** — long.table; app; received 2026-09-26T16:12:00+02:00; intake tag parser. The calendar invite for 8 July landed on 7 August. Nobody here touched it.
+- **R-41600** — ridge.clinic; email; received 2026-09-27T13:57:00+02:00; intake tag parser. My client came on 9 March instead of 3 September. We sorted it out.
+- **R-41601** — stone.and.sons; app; received 2026-09-27T13:22:00+01:00; intake tag parser. We had two people show up on 11 June. They were booked for 6 November.
+- **R-41602** — nine.lanterns; app; received 2026-09-27T15:53:00+02:00; intake tag parser. The reminder for 11 March arrived for 3 November.
+- **R-41603** — harbour.dental; app; received 2026-09-27T19:00:00+01:00; intake tag parser. The calendar invite for 6 March landed on 3 June. Nobody here touched it.
+- **R-41604** — kettle.books; app; received 2026-09-27T22:20:00+02:00; intake tag parser. Booked for 4 December. The invite says 12 April.
+- **R-41605** — morrow.tax; app; received 2026-09-28T09:39:00+02:00; intake tag parser. Customer booked 5 August and got an invite for 8 May. Please look at this.
+- **R-41606** — alder.physio; app; received 2026-09-29T10:46:00+02:00; intake tag parser. Booked for 3 July. The invite says 7 March.
+- **R-41608** — nine.lanterns; email; received 2026-09-30T19:43:00+02:00; intake tag parser. We had two people show up on 8 September. They were booked for 9 August.
+- **R-41609** — lantern.row; email; received 2026-10-01T09:03:00+02:00; intake tag parser. The calendar invite for 10 November landed on 11 October. Nobody here touched it.
+- **R-41610** — kettle.books; email; received 2026-10-01T13:56:00+02:00; intake tag parser. Booked for 4 July. The invite says 7 April.
+- **R-41611** — kettle.books; app; received 2026-10-01T14:30:00+02:00; intake tag parser. Booked for 1 April. The invite says 4 January.
+- **R-41612** — stone.and.sons; app; received 2026-10-01T15:38:00+01:00; intake tag parser. Invite says Friday 3 April. We agreed Wednesday 4 March. Which one do I trust?
+- **R-41613** — alder.physio; app; received 2026-10-01T17:50:00+02:00; intake tag parser. We had two people show up on 1 February. They were booked for 2 January.
+- **R-41614** — ridge.clinic; email; received 2026-10-02T08:45:00+02:00; intake tag parser. Thursday 8 January showed as Saturday 1 August. I moved it myself.
+- **R-41615** — stone.and.sons; email; received 2026-10-02T12:16:00+01:00; intake tag parser. Our October bookings came through for January. We are a heating company. January is when we need them. Thank you, actually.
+- **R-41616** — stone.and.sons; email; received 2026-10-02T18:03:00+01:00; intake tag parser. Invite says Friday 7 August. We agreed Wednesday 8 July. Which one do I trust?
+- **R-41617** — stone.and.sons; form; received 2026-10-03T16:42:00+01:00; intake tag parser. Every booking we make shows the wrong day. 5 April is now 4 May.
+- **R-41618** — ridge.clinic; email; received 2026-10-03T20:42:00+02:00; intake tag parser. Every booking we make shows the wrong day. 7 May is now 5 July.
+- **R-41619** — harbour.dental; email; received 2026-10-04T20:30:00+01:00; intake tag parser. Booked for 9 December. The invite says 12 September.

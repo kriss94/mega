@@ -1,0 +1,45 @@
+---
+layout: runbook
+title: '#4471 · report split and evidence gaps'
+owner: kriss94
+status: investigation
+reviewed: 2026-10-30
+signature: 'kriss94 / Codex / S01E03 / 2026-10-30'
+---
+
+<script>
+  import ReportSplit from '#lib/kb/ReportSplit.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+The original ticket's claim that one parser fix covers every report is not supported by this export.
+This page records the 2026-10-04 snapshot. Live desk updates were unavailable; the review date does
+not imply that the data is current.
+
+<ReportSplit />
+
+## Separate the evidence before assigning fixes
+
+Use tenant locale and booking-form version, rather than browser locale or intake tags, to distinguish
+the shared month-first parser from booking-v3's month-first hint on a day-first form. Deduplicate by
+report ID; matching subjects alone do not establish a shared cause.
+
+The desk's oneDayMove list contradicts its parser attribution. R-41202, R-41209, R-41344 and R-41620
+describe one-day discrepancies. R-41236 instead says the invite arrived before the booking and
+needs its own chronology investigation. No timezone root cause has been demonstrated.
+
+The five exceptions remain part of the original ticket's mechanically computed parser group;
+the report files exclude them from that group's issue count to avoid double counting.
+This is a provisional triage split, not proof of four independent root causes.
+
+## Evidence and follow-up
+
+[Report bodies, ID mapping and reproducible analysis](https://github.com/kriss94/mega/tree/main/s01e03/reports)
+are preserved alongside the export. Run `node s01e03/analyze.mjs` at the repository root to verify
+counts. The product itself has not been run, and the export contains no package manifest for a KB build.
+
+Obtain original event timestamps and timezone settings for the discrepant reports. Recheck desk
+updates before claiming a current total or resolution. The accepted subject-only dedupe decision
+is preserved; replacing it requires a new decision record.
+
+<RenderStamp {signature} />
