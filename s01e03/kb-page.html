@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>#4471 · report split and evidence gaps · support kb</title><style>
+  :root {
+    --bg: #fbfaf7; --fg: #1d1d1b; --muted: #6b6a66; --line: #e3e0d8;
+    --accent: #2f6f5e; --warn: #b4501f; --warn-bg: #fbeee6; --note-bg: #eef5f2;
+    --mono: ui-monospace, 'Cascadia Code', Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #171716; --fg: #ecebe6; --muted: #9c9a93; --line: #34332f;
+      --accent: #6fbfa6; --warn: #f0905d; --warn-bg: #3a2418; --note-bg: #1d2c27;
+    }
+  }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, sans-serif; }
+  .kb table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.92rem; }
+  .kb th, .kb td { border-bottom: 1px solid var(--line); padding: 0.35rem 0.5rem; text-align: left; }
+  .kb code { font-family: var(--mono); font-size: 0.88em; }
+  .kb a { color: var(--accent); }
+  .kb { max-width: 760px; margin: 0 auto; padding: 2rem 16px 4rem; }
+  .crumb { font: 0.8rem var(--mono); text-decoration: none; color: var(--muted); }
+  h1 { margin: 0.25rem 0 0.5rem; line-height: 1.2; }
+  .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; color: var(--muted); font-size: 0.85rem; margin: 0; }
+  .status { border: 1px solid var(--line); border-radius: 99px; padding: 0 0.6rem; }
+  .stale { color: var(--warn); font-weight: 600; }
+  .banner { background: var(--warn-bg); color: var(--warn); padding: 0.6rem 1rem; border-radius: 6px; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+</style><div class="kb"><header><a class="crumb" href="https://github.com/kriss94/mega/tree/main/s01e03/export/support-kb/src/routes/kb">support desk · kb</a><h1>#4471 · report split and evidence gaps</h1><p class="meta">owner kriss94 · investigation · reviewed 2026-10-30</p></header><main><p>The original ticket's claim that one parser fix covers every report is not supported by this export.
+This page records the 2026-10-04 snapshot. The student confirmed no newer material was available on 2026-10-30; the review date does
+not imply that the data is current.</p>
+<p>427 export rows; 412 unique reports merged into #4471.</p><table><thead><tr><th>Problem / investigation</th><th>Unique reports</th><th>Evidence status</th></tr></thead><tbody><tr><td>Shared month-first parser</td><td>374</td><td>Tenant-based attribution, excluding contradictions</td></tr><tr><td>booking-v3 date hint</td><td>33</td><td>Distinct form configuration problem</td></tr><tr><td>One-day discrepancies</td><td>4</td><td>Cause unconfirmed</td></tr><tr><td>Invite before booking</td><td>1</td><td>Ambiguous chronology; cause unconfirmed</td></tr></tbody></table>
+<h2>Separate the evidence before assigning fixes</h2>
+<p>Use tenant locale and booking-form version, rather than browser locale or intake tags, to distinguish
+the shared month-first parser from booking-v3's month-first hint on a day-first form. Deduplicate by
+report ID; matching subjects alone do not establish a shared cause.</p>
+<p>The desk's oneDayMove list contradicts its parser attribution. R-41202, R-41209, R-41344 and R-41620
+describe one-day discrepancies. R-41236 instead says the invite arrived before the booking and
+needs its own chronology investigation. No timezone root cause has been demonstrated.</p>
+<p>The five exceptions remain part of the original ticket's mechanically computed parser group;
+the report files exclude them from that group's issue count to avoid double counting.
+This is a provisional triage split, not proof of four independent root causes.</p>
+<h2>Evidence and follow-up</h2>
+<p><a href="https://github.com/kriss94/mega/tree/main/s01e03/reports">Report bodies, ID mapping and reproducible analysis</a>
+are preserved alongside the export. Run <code>node s01e03/analyze.mjs</code> at the repository root to verify
+counts. The product itself has not been run, and the export contains no package manifest for a KB build.</p>
+<p>Obtain original event timestamps and timezone settings for the discrepant reports. Recheck desk
+updates before claiming a current total or resolution. The accepted subject-only dedupe decision
+is preserved; replacing it requires a new decision record.</p>
+<h2>GitHub issues</h2>
+<ul>
+<li><a href="https://github.com/kriss94/mega/issues/1">parser</a></li>
+<li><a href="https://github.com/kriss94/mega/issues/2">hint</a></li>
+<li><a href="https://github.com/kriss94/mega/issues/3">one-day</a></li>
+<li><a href="https://github.com/kriss94/mega/issues/4">chronology</a></li>
+</ul>
+<p class="stamp">desk ref <b>DR-914S-7CBX</b></p>
+</main><footer>Static review copy from the supplied KB layout and reconciled export. Svelte runtime not executed.</footer></div></html>

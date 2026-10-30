@@ -4,7 +4,7 @@ Source: merged ticket #4471, KB export dated 2026-10-04.
 
 **Reports covered: 4 unique reports.**
 
-Four reports explicitly describe a one-day discrepancy. Day/month swapping does not explain these examples. Timezone handling is a hypothesis, not a demonstrated cause. The export mechanically places all four under parser.
+Four reports explicitly describe a one-day discrepancy. Day/month swapping does not explain these examples. These reports do not establish a shared root cause. Timezone handling is a hypothesis, not a demonstrated cause; Lisbon and Toronto can correctly show different local dates for the same instant. The export mechanically places all four under parser.
 
 ## Verification / investigation
 
@@ -12,10 +12,10 @@ Compare invite and calendar dates for R-41202; compare the same meeting in Lisbo
 
 ## Evidence
 
-- Source records: ../export/support-kb/src/lib/data/reports-4471.json
-- Attribution logic: ../export/support-kb/src/lib/kb/causes.ts and tenant JSON records
-- Anomaly index: ../export/support-kb/src/lib/data/desk-notes.json
-- Full ID mapping: reconciliation.json
+- Source records: https://github.com/kriss94/mega/tree/main/s01e03/export/support-kb/src/lib/data/reports-4471.json
+- Attribution logic: https://github.com/kriss94/mega/tree/main/s01e03/export/support-kb/src/lib/kb/causes.ts and tenant JSON records
+- Anomaly index: https://github.com/kriss94/mega/tree/main/s01e03/export/support-kb/src/lib/data/desk-notes.json
+- Full ID mapping: https://github.com/kriss94/mega/blob/main/s01e03/reports/reconciliation.json
 - No product runtime or live desk update source was available. Counts describe this export only.
 
 ## Report records

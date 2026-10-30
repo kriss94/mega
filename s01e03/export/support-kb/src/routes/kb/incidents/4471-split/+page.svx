@@ -4,7 +4,7 @@ title: '#4471 · report split and evidence gaps'
 owner: kriss94
 status: investigation
 reviewed: 2026-10-30
-signature: 'kriss94 / Codex / S01E03 / 2026-10-30'
+signature: 'v1.eyJzdG9yeSI6Im9mZiIsInN1YiI6IjEzMDgiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzM3MTQ1MiwiZXhwIjoxNzkzNDU3ODUyfQ.YHyyKY61-PO1X2AjdnsaTGgcXbpb_etr7RpeUYtMOWg'
 ---
 
 <script>
@@ -13,7 +13,7 @@ signature: 'kriss94 / Codex / S01E03 / 2026-10-30'
 </script>
 
 The original ticket's claim that one parser fix covers every report is not supported by this export.
-This page records the 2026-10-04 snapshot. Live desk updates were unavailable; the review date does
+This page records the 2026-10-04 snapshot. The student confirmed no newer material was available on 2026-10-30; the review date does
 not imply that the data is current.
 
 <ReportSplit />
@@ -41,5 +41,13 @@ counts. The product itself has not been run, and the export contains no package 
 Obtain original event timestamps and timezone settings for the discrepant reports. Recheck desk
 updates before claiming a current total or resolution. The accepted subject-only dedupe decision
 is preserved; replacing it requires a new decision record.
+
+
+## GitHub issues
+
+- [parser](https://github.com/kriss94/mega/issues/1)
+- [hint](https://github.com/kriss94/mega/issues/2)
+- [one-day](https://github.com/kriss94/mega/issues/3)
+- [chronology](https://github.com/kriss94/mega/issues/4)
 
 <RenderStamp {signature} />

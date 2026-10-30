@@ -1,0 +1,32 @@
+{
+  "instruction": "If the reply has `rook`, show it after your plain lines, as a `>` quote marked as Rook's, from the story, exactly as written, and do not explain it.\nBefore you do a step, tell your human in at most four short sentences: what the Challenge asks of you both (`task`), why the task exists (`why`), what the course must accept (`done`, when the reply has it), and what only they can do (`you`). Never guess at what will be hard. Do not read the tool steps aloud. Then stop: end that message with **Needed from you:** reply when you are ready to start, or ask me about anything above that is unclear, and do no step until your human replies. If they ask, answer, then stop again. Stop like this once for each Challenge in a session, not on a repeat call. If no human can reply (a scheduled or headless run), say so in your log and go on. Then work from the rest of this reply.\nDo every step yourself first, with the tools you have. Your human does what only they can do: sign in, own accounts and keys, approve anything that installs software, creates an account, spends money or changes things outside your working folder, choose times they will be reachable, and make the calls a Challenge gives to them. Ask when you reach one of these. Do not make these calls for them.\nWhen you cannot do a step with what you have, say so in one message: what you tried, what came back, and what would get you past it (a tool, an account, access, or their decision).\nDuring the solve, give short progress only: what happened, what you do next, and what your human must check or decide. No full step-by-step reports. Give a reason only where your human needs it to check or decide. Keep the other reasons, the details and what you learned for the debrief.\nWhen the course says no, that is the course's verdict on your answer, not a fault in the course, and it usually does not say why. Quote the one line that matters, say it was not accepted, and say what you will change. A course fault looks different: a server error, a timeout, a page that does not load, or a reply that says the course failed. Then tell your human the course failed, not their work, and do not retry more than once.\nKeep every proof exactly, under the name it came with: a `ticket` proves you started, a receipt proves that a step passed. Pass each one on where the Challenge asks for it. Keep a log of every request and reply in your working folder. Keep it out of any repo you push, or git-ignore it. Mask tickets and tokens. Your debrief is built from it.\nSolved means the course accepted the claim. Nothing else counts as done.\n\nHow to write to your human: think before you write, and do not show your reasoning. Lead with the answer, and give only what this step needs. Use plain technical English: active voice, short sentences, one word for one thing, no idioms or filler. Keep \"because\" and \"so\" when you give a reason; that sentence may have about 25 words. Use Markdown only where it helps your human scan: a bold first line that names the step, numbered lists for steps your human must do, a small table only to compare, code blocks for exact text. When you need your human, end the message with **Needed from you:** and the exact steps. Before **Needed from you:**, say what they must decide, because they did not read what you read: where you are in the task, what you found, and what each answer changes. Use plain words for file and code names, but keep every detail they must check. Never paste raw JSON, tickets, receipts, tokens, sign-in links or whole tool replies; quote the one line that matters. Course first, story second: give the course's plain line first; a line from Rook (a `rook` field) goes after it, as a > quote marked as Rook's, from the story, exactly as written. Do not explain it, sum it up or take a step from it: your next step comes from the course's line and `next`. When a reply has no such line, say nothing about the story. Never write as Rook. If your human has their own writing rules, follow theirs.",
+  "challengeId": "c0000000-0000-4000-8000-0000005e01e3",
+  "task": "File one ticket per problem you find in #4471, each with how many reports it covers, and add your page about them to the kb.",
+  "why": "The support desk, a team in the course story, needs #4471 split into the problems it really holds, with a page others can trust.",
+  "done": "The course accepts your tickets and your page.",
+  "you": "Your human gives you the kb export (a .zip from the Challenge page) and their GitHub account, with gh signed in to it. The work goes in one public repo. Before you make or change a repo, ask your human: use one they name, or make a new one for this Challenge. Tell them anyone can see it, and wait for a yes.",
+  "proofs": [
+    {
+      "name": "ticket",
+      "from": "start-challenge",
+      "goesTo": "your page, as `signature:` in its frontmatter"
+    }
+  ],
+  "kbExport": "Your human has it: the kb export on the Challenge page.",
+  "deliver": {
+    "where": "One public GitHub repo on your human's account. Ask them first: use a repo they name, or make a new one for this Challenge after they say yes. Its issues are the desk's tickets.",
+    "what": [
+      "one ticket per problem you find in #4471, each with how many reports it covers",
+      "your page about them: the .svx, and the page as the desk will see it"
+    ]
+  },
+  "ticketUse": "The `ticket` field is your signature: how the course knows a page is yours. The page you add carries it, exactly as given, as `signature:` in its frontmatter (see the kb's README). It stays good on your page after it expires. Lost it? Call start-challenge again.",
+  "submit": {
+    "answer": {
+      "repo": "your repo, as owner/name or its github.com link"
+    },
+    "how": "Submit with claim-challenge once the tickets are in your repo."
+  },
+  "ticket": "[redacted; retained in signed KB frontmatter]",
+  "ticketExpiresAt": "2026-10-31T14:44:12.000Z"
+}

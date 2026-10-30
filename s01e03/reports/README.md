@@ -1,6 +1,6 @@
 # Ticket #4471 report split
 
-Snapshot: KB export dated 2026-10-04. Analysis reviewed 2026-10-30; live desk updates unavailable.
+Snapshot: KB export dated 2026-10-04. Analysis reviewed 2026-10-30; student confirmed no newer material on 2026-10-30.
 
 | Report | Unique reports | Status |
 |---|---:|---|
@@ -17,7 +17,16 @@ See [reconciliation.json](reconciliation.json) for every ID and the source archi
 Run `node s01e03/analyze.mjs` from the repository root. This regenerates the four issue-ready reports
 and reconciliation from the preserved export. This verifies data attribution, not product behavior.
 
-GitHub issue creation is blocked: the connected GitHub tools return “Unknown tool” and the GitHub CLI
-is absent. These files are ready to use as issue bodies; no GitHub issue URLs have been obtained.
+GitHub CLI is now available. The authenticated all-state issue check on 2026-10-30 returned no issues.
+No GitHub changes are authorized yet. See [proposed scope](proposed-changes.md).
 
 The signed KB page is in `../export/support-kb/src/routes/kb/incidents/4471-split/+page.svx`.
+
+Static desk-facing review copy: [kb-page.html](../kb-page.html), regenerated with `python3 s01e03/render_kb.py`. This uses the supplied layout and reconciled data without executing Svelte.
+
+## GitHub issues
+
+- [parser](https://github.com/kriss94/mega/issues/1)
+- [hint](https://github.com/kriss94/mega/issues/2)
+- [one-day](https://github.com/kriss94/mega/issues/3)
+- [chronology](https://github.com/kriss94/mega/issues/4)

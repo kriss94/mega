@@ -12,10 +12,10 @@ Use a day-first tenant through app/email or booking-v2; enter an unambiguous int
 
 ## Evidence
 
-- Source records: ../export/support-kb/src/lib/data/reports-4471.json
-- Attribution logic: ../export/support-kb/src/lib/kb/causes.ts and tenant JSON records
-- Anomaly index: ../export/support-kb/src/lib/data/desk-notes.json
-- Full ID mapping: reconciliation.json
+- Source records: https://github.com/kriss94/mega/tree/main/s01e03/export/support-kb/src/lib/data/reports-4471.json
+- Attribution logic: https://github.com/kriss94/mega/tree/main/s01e03/export/support-kb/src/lib/kb/causes.ts and tenant JSON records
+- Anomaly index: https://github.com/kriss94/mega/tree/main/s01e03/export/support-kb/src/lib/data/desk-notes.json
+- Full ID mapping: https://github.com/kriss94/mega/blob/main/s01e03/reports/reconciliation.json
 - No product runtime or live desk update source was available. Counts describe this export only.
 
 ## Report records

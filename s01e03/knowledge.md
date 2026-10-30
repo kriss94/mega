@@ -39,3 +39,19 @@ Recheck mutable evidence before publication where possible. State the snapshot/c
 - Run from repository root: node s01e03/analyze.mjs. Independent check verified duplicate equality and complete disjoint ID coverage.
 - Signed page: export/support-kb/src/routes/kb/incidents/4471-split/+page.svx. Original accepted decision unchanged. No runtime manifest supplied.
 - Git remote access works with escalation; GitHub connector tools fail Unknown tool; gh CLI absent. Live desk freshness unverified.
+
+## MCP brief and renewed verification (2026-10-30)
+- start-challenge with the recorded S01E03 UUID successfully returned the full brief; redacted copy: challenge-instructions.json. resume-challenge previously returned no resumable state. check-lane lists gh/upload-cli/skill-wiring/hint/browser, with no desk-data retrieval tool.
+- Actual MCP ticket is now retained exactly as signature in the added KB page; do not use the former handwritten signature. RenderStamp derives its desk ref. Never paste the ticket into commentary or logs.
+- Deliverables: issues with counts, added .svx, and desk-facing page in one public repo. Submit via claim-challenge with answer.repo = kriss94/mega and exact retained ticket receipt. Acceptance and then debrief are required.
+- Independent read-only verification reconfirmed 427/412/15 and disjoint 374/33/4/1. Four one-day reports are a symptom-based investigation, not a confirmed common bug; Lisbon/Toronto local dates may be valid.
+- Exhaustive exported source/README search found no desk update URL or live fetch. MCP brief supplies no update endpoint. Web open of the exact challenge URL returned inaccessible. Still missing: newer desk evidence or its source, and any additional page-only update instructions.
+- gh is installed now. Sandboxed issue listing failed connecting to api.github.com; escalated gh issue list --repo kriss94/mega --state all --limit 100 --json number,title,url succeeded with an empty list. No issues exist in that result; no mutations made.
+- Local preparation: fixed actual course signature, portable evidence links and singular grammar; clarified unconfirmed causes. Added reports/proposed-changes.md and static kb-page.html with render_kb.py using installed markdown_it and supplied layout. This is not a Svelte runtime test.
+- Checks: node s01e03/analyze.mjs; python3 s01e03/render_kb.py (counts and derived stamp assertions); git diff --check.
+- Next: obtain desk updates/source, review issue bodies and static KB artifact, then request concrete GitHub approval. Do not publish or submit before approval and freshness review. Course remains unsolved.
+
+## Approved publication (2026-10-30)
+- Student confirmed no newer material and approved the reviewed changes and course submission.
+- Created issues #1 parser (374), #2 hint (33), #3 one-day investigation (4), #4 chronology investigation (1) in kriss94/mega; URLs in reports/issue-urls.json and KB/docs.
+- Publishing approved S01E03 files and submitting via MCP next. Not complete pending explicit course acceptance.
